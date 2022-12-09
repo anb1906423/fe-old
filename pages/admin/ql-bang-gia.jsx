@@ -225,6 +225,9 @@ const PriceTableManagePage = () => {
                                 onChange={(e) => setPrice(price => [...price, e.target.value])}
                                 required
                             />
+                            {
+                                console.log(price)
+                            }
                         </div>
                     </div>
                     <div className='version-price-box d-flex align-items-center justify-content-between'>
@@ -237,6 +240,9 @@ const PriceTableManagePage = () => {
                                     )
                                 }
                             </select>
+                            {
+                                console.log(version)
+                            }
                         </div>
                         <div>
                             <label className="" htmlFor="price">Giá:</label>

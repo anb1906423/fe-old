@@ -18,12 +18,12 @@ const PriceTableItem = (props) => {
 
   const versionItem = version.map((item, index) => {
     return (
-      <td className="fw-bold" key={index}>{item}</td>
+      <div className="fw-bold" key={index}>{item}</div>
     )
   })
   const priceItem = price.map((item, index) => {
     return (
-      <td className="fw-bold" key={index}>{item}</td>
+      <div className="fw-bold" key={index}>{item}</div>
     )
   })
 
@@ -68,12 +68,16 @@ const PriceTableItem = (props) => {
           <table className="table table-bordered">
             <tbody>
               <tr>
-                <td className="fw-bold bg-light">Phiên bản:</td>
-                {versionItem}
+                <td className="fw-bold bg-light">Phiên bản</td>
+                <td className="fw-bold bg-light">Giá&nbsp;(VNĐ)</td>
               </tr>
               <tr>
-                <td className="fw-bold bg-light">Giá&nbsp;(VNĐ):</td>
-                {priceItem}
+                <td>
+                  {versionItem}
+                </td>
+                <td>
+                  {priceItem}
+                </td>
               </tr>
             </tbody>
           </table>
