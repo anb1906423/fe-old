@@ -129,6 +129,12 @@ const register = () => {
     <div className="account-page register">
       <Head>
         <title>Nhận báo giá</title>
+        <meta name="title" content="Báo giá xe Suzuki thành phố Cần Thơ hôm nay" />
+        <meta name='revisit-after' content='1 days' />
+        <meta http-equiv="content-language" content="vi" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name='city' content='Cần Thơ'/>
+        <meta name="description" content="Đăng ký để nhận báo giá xe Suzuki Cần Thơ hôm nay nhanh, chính xác và ưu đãi nhất."/>
       </Head>
       <Heading title="Đăng ký" />
       <div className="register-wrapper">

@@ -17,6 +17,12 @@ const PriceTable = () => {
     <div className="price-table-group">
       <Head>
         <title>Bảng giá</title>
+        <meta name="title" content="Bảng giá xe Suzuki Cần Thơ - xesuzukicantho.com"/>
+        <meta name='revisit-after' content='1 days' />
+        <meta http-equiv="content-language" content="vi" />
+        <meta name='city' content='Cần Thơ'/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content="Cập nhật bảng giá mới nhất từng dòng xe Suzuki. XL7, New XL7 Sport Limited, Ciaz, Ertiga, Swift ..." />
       </Head>
       <Heading title="Bảng giá" />
       <div className="">

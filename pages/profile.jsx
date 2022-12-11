@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Heading from '../components/Heading'
 import { useCookies } from 'react-cookie'
+import { swalert } from "../mixins/swal.mixin";
 
 const profile = () => {
   const [users, setUsers] = useState([])
@@ -12,8 +13,20 @@ const profile = () => {
   const [userCreated, setUserCreated] = useState('')
 
   const logOutHandler = () => {
-    setCookie('user', '')
-    window.location.assign('/')
+    swalert
+      .fire({
+        title: "Đăng xuất",
+        icon: "warning",
+        text: "Bạn muốn đăng xuất?",
+        showCloseButton: true,
+        showCancelButton: true,
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          setCookie('user', '')
+          window.location.assign('/')
+        }
+      })
   }
 
   useEffect(() => {
@@ -46,6 +59,10 @@ const profile = () => {
     <div className='account-page profile-container'>
       <Head>
         <title>Profile</title>
+        <meta name='revisit-after' content='1 days' />
+        <meta http-equiv="content-language" content="vi" />
+        <meta name='city' content='Cần Thơ'/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
       <Heading title="Profile" />
       <table className="profile table text-left">

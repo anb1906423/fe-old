@@ -36,6 +36,12 @@ const Contact = () => {
     <div className="contact">
       <Head>
         <title>Liên hệ</title>
+        <meta name="title" content="Liên hệ đại lý Suzuki thành phố Cần Thơ" />
+        <meta name='revisit-after' content='1 days' />
+        <meta http-equiv="content-language" content="vi" />
+        <meta name='city' content='Cần Thơ'/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content="Liên hệ để được tư vấn hoặc cần giải đáp thắc mắc: 0918.941.966 Mr. Tâm hoặc Facebook Nguyễn Văn Tâm."/>
       </Head>
       <Heading title="Liên hệ" />
       <div className="contact-content d-flex w-100 flex-row flex-wrap justify-content-around">

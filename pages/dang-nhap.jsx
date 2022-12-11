@@ -77,6 +77,12 @@ const login = () => {
         <div className="account-page login">
             <Head>
                 <title>Đăng nhập</title>
+                <meta name="title" content="Trang đăng nhập xe Suzuki Cần Thơ - xesuzukicantho.com" />
+                <meta name="description" content="Đăng nhập xe Suzuki Cần Thơ - xesuzukicantho.com" />
+                <meta name='revisit-after' content='1 days' />
+                <meta name='city' content='Cần Thơ'/>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta http-equiv="content-language" content="vi" />
             </Head>
             <Heading title="Đăng nhập" />
             <div className="login-wrapper">
