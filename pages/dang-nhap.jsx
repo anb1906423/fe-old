@@ -106,7 +106,7 @@ const login = () => {
                         />
                         <p className="text-danger">{err}</p>
                         <button className="btn submit-btn log-up-btn w-100 text-white" type="submit">Đăng nhập</button>
-                        <p className="have-account text-center">Chưa có tài khoản? Đăng ký để nhận báo giá.</p>
+                        <p className="have-account text-center">Chưa có tài khoản? Đăng ký.</p>
                         <Link href="/nhan-bao-gia">
                             <button className="btn sub-btn w-100">Đăng ký</button>
                         </Link>

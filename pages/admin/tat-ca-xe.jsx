@@ -8,6 +8,7 @@ import { swalert, swtoast } from "../../mixins/swal.mixin";
 import Cookie, { useCookies } from 'react-cookie'
 import { useRouter } from 'next/router'
 import CKeditor from '../../components/CKeditor'
+import $ from 'jquery'
 const ADDPRODUCT_URL = 'http://localhost:3001/admin/add-product'
 
 const typeProducts = ['Xe du lịch', 'Xe tải']
@@ -47,9 +48,13 @@ const adminPage = () => {
     let isMounted = true;
     const controller = new AbortController();
     const userCookie = cookies.user
+    if (userCookie.roles != 1) {
+      $('.admin-page').hide()
+    }
 
     setToken(userCookie.accessToken)
     setRoles(userCookie.roles)
+
     const getProducts = async () => {
       fetch('http://localhost:3001/admin', {
         headers: {

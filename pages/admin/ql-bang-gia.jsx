@@ -6,17 +6,27 @@ import Head from 'next/head'
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
 import { swalert, swtoast } from "../../mixins/swal.mixin";
-
-const versionList = ['Tiêu chuẩn (Base)', 'Cao cấp (Sport)', 'Số sàn']
+import $ from 'jquery'
 
 const PriceTableManagePage = () => {
     const nameCarRef = useRef()
     const srcCarRef = useRef()
     const priceRef = useRef()
+    var self = this
 
     const [nameCar, setNameCar] = useState('')
     const [srcCar, setSrcCar] = useState('')
-    var [version, setVersion] = useState([])
+
+    const [version1, setVersion1] = useState('Tiêu chuẩn (Base)')
+    const [version2, setVersion2] = useState('Cao cấp (Sport)')
+    const [version3, setVersion3] = useState('Số sàn')
+    const [version4, setVersion4] = useState('')
+    const [version, setVersion] = useState([])
+
+    const [price1, setPrice1] = useState('')
+    const [price2, setPrice2] = useState('')
+    const [price3, setPrice3] = useState('')
+    const [price4, setPrice4] = useState('')
     const [price, setPrice] = useState([])
     const [err, setErr] = useState('')
     const [versionCount, setVersionCount] = useState(2)
@@ -28,8 +38,11 @@ const PriceTableManagePage = () => {
     const [token, setToken] = useState('')
 
     useEffect(() => {
-        nameCarRef.current.focus()
-    }, [])
+        setVersion([version1, version2, version3])
+    }, [version1, version2, version3])
+    useEffect(() => {
+        setPrice([price1, price2, price3])
+    }, [price1, price2, price3])
 
     useEffect(() => {
         let isMounted = true;
@@ -38,6 +51,9 @@ const PriceTableManagePage = () => {
 
         setToken(userCookie.accessToken)
         setRoles(userCookie.roles)
+        if (userCookie.roles != 1) {
+            $('.price-table-manage-page').hide()
+        }
         const getPriceTable = async () => {
             fetch('http://localhost:3001/admin/find-all-price-table', {
                 headers: {
@@ -66,20 +82,12 @@ const PriceTableManagePage = () => {
             nameCarRef.current.focus();
             return
         }
-        if (!price) {
-            setErr("Giá xe không được để trống!");
-            priceRef.current.focus();
-            return
-        }
         if (!srcCar) {
             setErr("Link ảnh không được để trống!");
             srcCarRef.current.focus();
             return
         }
         try {
-            const versionCheck = version != '' ? version : versionList[0]
-            version = versionCheck
-
             const token = userCookie.accessToken
             const body = { nameCar, price, srcCar, version }
             console.log(body);
@@ -177,16 +185,16 @@ const PriceTableManagePage = () => {
                         value={srcCar}
                         onChange={(e) => setSrcCar(e.target.value)}
                     />
-                    <div className='version-price-box d-flex align-items-center justify-content-between'>
+                    <div className='version-price-box justify-content-between flex-wrap d-flex align-items-center'>
                         <div>
-                            <label htmlFor="type">Phiên bản:</label>
-                            <select name="" id="type" onChange={(e) => setVersion(version => [...version, e.target.value])} >
-                                {
-                                    versionList.map((item, index) =>
-                                        <option value={item} key={index} name={item}>{item}</option>
-                                    )
-                                }
-                            </select>
+                            <label htmlFor="version">Phiên bản:</label>
+                            <input
+                                id="version"
+                                type="text"
+                                value={version1}
+                                placeholder="Phiên bản 1"
+                                onChange={(e) => setVersion1(e.target.value)}
+                            />
                         </div>
                         <div>
                             <label className="" htmlFor="price">Giá:</label>
@@ -196,22 +204,21 @@ const PriceTableManagePage = () => {
                                 className=''
                                 placeholder="Ví dụ: 1.200.000.000, 560.000.000"
                                 ref={priceRef}
-                                value={price}
-                                onChange={(e) => setPrice(price => [...price, e.target.value])}
-                                required
+                                value={price1}
+                                onChange={(e) => setPrice1(e.target.value)}
                             />
                         </div>
                     </div>
-                    <div className='version-price-box d-flex align-items-center justify-content-between'>
+                    <div className='version-price-box flex-wrap d-flex align-items-center justify-content-between'>
                         <div>
-                            <label htmlFor="type">Phiên bản:</label>
-                            <select name="" id="type" onChange={(e) => setVersion(version => [...version, e.target.value])} >
-                                {
-                                    versionList.map((item, index) =>
-                                        <option value={item} key={index} name={item}>{item}</option>
-                                    )
-                                }
-                            </select>
+                            <label htmlFor="version">Phiên bản:</label>
+                            <input
+                                id="version"
+                                type="text"
+                                placeholder="Phiên bản 2"
+                                value={version2}
+                                onChange={(e) => setVersion2(e.target.value)}
+                            />
                         </div>
                         <div>
                             <label className="" htmlFor="price">Giá:</label>
@@ -221,28 +228,21 @@ const PriceTableManagePage = () => {
                                 className=''
                                 placeholder="Ví dụ: 1.200.000.000, 560.000.000"
                                 ref={priceRef}
-                                value={price}
-                                onChange={(e) => setPrice(price => [...price, e.target.value])}
-                                required
+                                value={price2}
+                                onChange={(e) => setPrice2(e.target.value)}
                             />
-                            {
-                                console.log(price)
-                            }
                         </div>
                     </div>
-                    <div className='version-price-box d-flex align-items-center justify-content-between'>
+                    <div className='version-price-box flex-wrap d-flex align-items-center justify-content-between'>
                         <div>
-                            <label htmlFor="type">Phiên bản:</label>
-                            <select name="" id="type" onChange={(e) => setVersion(version => [...version, e.target.value])} >
-                                {
-                                    versionList.map((item, index) =>
-                                        <option value={item} key={index} name={item}>{item}</option>
-                                    )
-                                }
-                            </select>
-                            {
-                                console.log(version)
-                            }
+                            <label htmlFor="version">Phiên bản:</label>
+                            <input
+                                id="version"
+                                type="text"
+                                placeholder="Phiên bản 3"
+                                value={version3}
+                                onChange={(e) => setVersion3(e.target.value)}
+                            />
                         </div>
                         <div>
                             <label className="" htmlFor="price">Giá:</label>
@@ -252,9 +252,32 @@ const PriceTableManagePage = () => {
                                 className=''
                                 placeholder="Ví dụ: 1.200.000.000, 560.000.000"
                                 ref={priceRef}
-                                value={price}
-                                onChange={(e) => setPrice(price => [...price, e.target.value])}
-                                required
+                                value={price3}
+                                onChange={(e) => setPrice3(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                    <div className='version-price-box flex-wrap d-flex align-items-center justify-content-between'>
+                        <div>
+                            <label htmlFor="version">Phiên bản:</label>
+                            <input
+                                id="version"
+                                type="text"
+                                placeholder="Phiên bản 4"
+                                value={version4}
+                                onChange={(e) => setVersion4(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <label className="" htmlFor="price">Giá:</label>
+                            <input
+                                id="price"
+                                type="text"
+                                className=''
+                                placeholder="Ví dụ: 1.200.000.000, 560.000.000"
+                                ref={priceRef}
+                                value={price4}
+                                onChange={(e) => setPrice4(e.target.value)}
                             />
                         </div>
                     </div>
@@ -276,6 +299,7 @@ const PriceTableManagePage = () => {
                                 srcCar={item.srcCar}
                                 version={item.version}
                                 price={item.price}
+                                // onRowDelete={self.props.onRowDelete}
                             />
                         )
                     })

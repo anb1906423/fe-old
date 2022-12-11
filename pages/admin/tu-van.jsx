@@ -2,20 +2,29 @@ import React, { useState, useEffect } from 'react'
 import HeaderAdmin from '../../components/HeaderAdmin'
 import Heading from '../../components/Heading'
 import { FaRegCopy } from 'react-icons/fa'
-import { swtoast } from "../../mixins/swal.mixin";
+import { swtoast, swalert } from "../../mixins/swal.mixin";
 import Head from 'next/head'
+import axios from 'axios'
 import Cookie, { useCookies } from 'react-cookie'
+import { FaTrash } from 'react-icons/fa'
+import $ from 'jquery'
 
 const inforCustomer = () => {
     const [users, setUsers] = useState([])
     const [cookies, setCookie] = useCookies(['user']);
     const userCookie = cookies.user
+    const [roles, setRoles] = useState('')
     const [isConsulted, setIsConsulted] = useState(false)
     var isConsultedLenght = 0
+
     useEffect(() => {
         let isMounted = true;
         const token = userCookie.accessToken
+        setRoles(userCookie.roles)
         const controller = new AbortController();
+        if (userCookie.roles != 1) {
+            $('.infor-customer').hide()
+        }
 
         const getAllUsers = async () => {
             fetch('http://localhost:3001', {
@@ -37,6 +46,38 @@ const inforCustomer = () => {
             controller.abort();
         }
     }, [])
+
+    const deleteUser = async (id) => {
+        const body = {
+            id: id,
+            isDeleteAll: false
+        }
+        swalert
+            .fire({
+                title: "Xác nhận đã tư vấn",
+                icon: "warning",
+                text: "Bạn chắc chắn đã tư vấn?",
+                showCloseButton: true,
+                showCancelButton: true,
+            })
+            .then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await axios.post('http://localhost:3001/delete-user', body);
+                        const userList = users.filter(user => user.id !== id)
+                        setUsers(userList);
+                        console.log(userList);
+                        console.log(response);
+                    } catch (err) {
+                        if (err.response.status === 400) {
+                            console.log("User id is required!")
+                        }
+                        console.log(`Error: ${err.message}`);
+                    }
+                }
+            })
+    }
+
     function copy(text) {
         navigator.clipboard.writeText(text)
         swtoast.success({
@@ -57,7 +98,7 @@ const inforCustomer = () => {
                 <title>Khách hàng chưa tư vấn</title>
             </Head>
             <HeaderAdmin />
-            <Heading title='Thông tin khách hàng' />
+            <Heading title='Khách hàng chờ tư vấn' />
             <table className='table customer-table w-100'>
                 <thead className="w-100 text-center">
                     <tr className="fs-6 w-100 align-items-center d-flex justify-content-around">
@@ -71,10 +112,9 @@ const inforCustomer = () => {
                 <tbody className="w-100 text-center">
                     {
                         users.map((item, index) => {
-                            if (item.consulted === false) {
-                                isConsultedLenght++
+                            if (item.roles !== 1) {
                                 return (
-                                    <tr key={index} className="w-100 d-flex align-items-center justify-content-around">
+                                    <tr key={index} className="w-100 consult-tr d-flex align-items-center justify-content-around">
                                         <td className="">{item.fullName}</td>
                                         <td className="">
                                             {item.phoneNumber}<FaRegCopy className="copy-icon" onClick={() => copy(item.phoneNumber)} />
@@ -83,8 +123,8 @@ const inforCustomer = () => {
                                             {sliceEmail(item.email)}<FaRegCopy className="copy-icon" onClick={() => copy(item.email)} />
                                         </td>
                                         <td className="text-center date-register">{converTime(item.created)}</td>
-                                        <td className='consulted-box'>
-                                            <input type="checkbox" onClick={() => item.consulted = !item.consulted} value={item.consulted} />
+                                        <td className='consulted-box consulted-group'>
+                                            <FaTrash onClick={() => deleteUser(item.id)} />
                                         </td>
                                     </tr>
                                 )
@@ -97,7 +137,7 @@ const inforCustomer = () => {
                 <tbody className="w-100 text-center">
                     <tr className="fs-6 w-100">
                         <th className="">Tổng cộng:</th>
-                        <th className="">{isConsultedLenght}</th>
+                        <th className="">{users.length - 1}</th>
                     </tr>
                 </tbody>
             </table>

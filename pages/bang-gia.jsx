@@ -20,7 +20,7 @@ const PriceTable = () => {
       </Head>
       <Heading title="Bảng giá" />
       <div className="">
-        {
+        {priceTable?.length ? (
           priceTable.map((item, index) => {
             return (
               <PriceTableItem
@@ -33,6 +33,7 @@ const PriceTable = () => {
               />
             )
           })
+        ) : <p className="text-center w-100">Bảng giá xe đang được cập nhật!</p>
         }
       </div>
     </div >

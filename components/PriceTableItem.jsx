@@ -8,6 +8,7 @@ const PriceTableItem = (props) => {
   const [priceTable, setPriceTable] = useState([])
   const version = props.version
   const price = props.price
+  var self = this;
 
   const [cookies, setCookies] = useCookies(['user'])
   const userCookie = cookies.user
@@ -17,16 +18,19 @@ const PriceTableItem = (props) => {
   }, [])
 
   const versionItem = version.map((item, index) => {
-    return (
-      <div className="fw-bold" key={index}>{item}</div>
-    )
+    if (item != '') {
+      return (
+        <div className="fw-bold" key={index}>{item}</div>
+      )
+    }
   })
   const priceItem = price.map((item, index) => {
-    return (
-      <div className="fw-bold" key={index}>{item}</div>
-    )
+    if (item != '') {
+      return (
+        <div className="fw-bold" key={index}>{item}</div>
+      )
+    }
   })
-
   const handleDeletePriceTable = async (id) => {
     const body = {
       id: id,
@@ -46,6 +50,7 @@ const PriceTableItem = (props) => {
             const response = await axios.post('http://localhost:3001/admin/delete-price-table', body);
             const priceTableList = priceTable.filter(priceTable => priceTable.id !== id)
             setPriceTable(priceTableList);
+            // self.props.onRowDelete(self.props.priceTableList)
             console.log(priceTableList);
             console.log(response);
           } catch (err) {
@@ -68,8 +73,8 @@ const PriceTableItem = (props) => {
           <table className="table table-bordered">
             <tbody>
               <tr>
-                <td className="fw-bold bg-light">Phiên bản</td>
-                <td className="fw-bold bg-light">Giá&nbsp;(VNĐ)</td>
+                <td className="fw-bold bg-light"><div>Phiên bản</div></td>
+                <td className="fw-bold bg-light"><div>Giá&nbsp;(VNĐ)</div></td>
               </tr>
               <tr>
                 <td>
