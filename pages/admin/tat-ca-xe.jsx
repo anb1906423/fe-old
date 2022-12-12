@@ -32,7 +32,7 @@ const adminPage = () => {
   // const [isLoading, setIsLoading] = useState(true)
   const [cookies, setCookie] = useCookies(['user']);
   const userCookie = cookies.user
-  const [roles, setRoles] = useState('')
+  const [roles, setRoles] = useState(0)
   const router = useRouter()
   const [token, setToken] = useState('')
 
@@ -41,23 +41,18 @@ const adminPage = () => {
   }, []);
 
   useEffect(() => {
-    
-  }, [products])
-
-  useEffect(() => {
     nameRef.current.focus();
   }, [])
 
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
-    const userCookie = cookies.user
     if (userCookie.roles != 1) {
       $('.admin-page').hide()
     }
-
     setToken(userCookie.accessToken)
     setRoles(userCookie.roles)
+
 
     const getProducts = async () => {
       fetch('http://localhost:3001/admin', {
@@ -118,7 +113,7 @@ const adminPage = () => {
       return
     }
     if (!src) {
-      setErr("Giá xe không được để trống!");
+      setErr("Link ảnh không được để trống!");
       srcRef.current.focus();
       return
     }

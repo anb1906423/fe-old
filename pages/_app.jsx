@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import Script from 'next/script'
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 import { useEffect } from 'react'
 
 export default function MyApp({ Component, pageProps }) {

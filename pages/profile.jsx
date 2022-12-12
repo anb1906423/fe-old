@@ -7,10 +7,16 @@ import { swalert } from "../mixins/swal.mixin";
 const profile = () => {
   const [users, setUsers] = useState([])
   const [cookies, setCookie] = useCookies(['user']);
-  const userCookie = cookies.user
+  var userCookie
+
   const [userFullName, setUserFullName] = useState('')
   const [userEmail, setUserEmail] = useState('')
   const [userCreated, setUserCreated] = useState('')
+  useEffect(() => {
+    if (cookies.user != '') {
+      userCookie = cookies.user
+    }
+  })
 
   const logOutHandler = () => {
     swalert
@@ -34,9 +40,10 @@ const profile = () => {
       .then((res) => res.json())
       .then((users) => {
         setUsers(users)
-        console.log(users);
       })
-    setUserEmail(userCookie.email)
+    if (cookies.user != '') {
+      setUserEmail(userCookie.email)
+    }
   }, [])
   useEffect(() => {
     for (const user of users) {
@@ -61,7 +68,7 @@ const profile = () => {
         <title>Profile</title>
         <meta name='revisit-after' content='1 days' />
         <meta http-equiv="content-language" content="vi" />
-        <meta name='city' content='Cần Thơ'/>
+        <meta name='city' content='Cần Thơ' />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
       <Heading title="Profile" />

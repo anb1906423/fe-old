@@ -7,11 +7,13 @@ import axios from 'axios'
 import { useCookies } from 'react-cookie'
 import { swalert, swtoast } from "../../mixins/swal.mixin";
 import $ from 'jquery'
+import homeAPI from '../../config'
 
 const PriceTableManagePage = () => {
     const nameCarRef = useRef()
     const srcCarRef = useRef()
     const priceRef = useRef()
+    console.log(homeAPI);
     var self = this
 
     const [nameCar, setNameCar] = useState('')
@@ -33,9 +35,16 @@ const PriceTableManagePage = () => {
 
     const [priceTable, setPriceTable] = useState([])
     const [cookies, setCookies] = useCookies(['user'])
-    const userCookie = cookies.user
-    const [roles, setRoles] = useState('')
+    var userCookie
+    const [roles, setRoles] = useState(0)
     const [token, setToken] = useState('')
+
+    useEffect(() => {
+        if (cookies.user != '') {
+            userCookie = cookies.user
+            setRoles(userCookie.roles)
+        }
+    })
 
     useEffect(() => {
         setVersion([version1, version2, version3])
@@ -55,7 +64,7 @@ const PriceTableManagePage = () => {
             $('.price-table-manage-page').hide()
         }
         const getPriceTable = async () => {
-            fetch('http://localhost:3001/admin/find-all-price-table', {
+            fetch(homeAPI + '/admin/find-all-price-table', {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -91,7 +100,7 @@ const PriceTableManagePage = () => {
             const token = userCookie.accessToken
             const body = { nameCar, price, srcCar, version }
             console.log(body);
-            const response = await axios.post('http://localhost:3001/admin/add-price-table', body
+            const response = await axios.post(homeAPI + '/admin/add-price-table', body
                 ,
                 {
                     headers: {
@@ -299,7 +308,7 @@ const PriceTableManagePage = () => {
                                 srcCar={item.srcCar}
                                 version={item.version}
                                 price={item.price}
-                                // onRowDelete={self.props.onRowDelete}
+                            // onRowDelete={self.props.onRowDelete}
                             />
                         )
                     })

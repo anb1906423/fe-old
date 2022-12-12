@@ -21,7 +21,7 @@ const Product = () => {
         <meta name="title" content="Xe Suzuki thành phố Cần Thơ" />
         <meta name='revisit-after' content='1 days' />
         <meta http-equiv="content-language" content="vi" />
-        <meta name='city' content='Cần Thơ'/>
+        <meta name='city' content='Cần Thơ' />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name='description' content="Trang trưng bày, tham khảo, chi tiết thông số cũng như giá bán các dòng xe Suzuki chính hãng. Tư vấn tận tình, giá cả hợp lý, đáng tin cậy, được nhiều khách hàng tin tưởng lựa chọn." />
       </Head>
@@ -42,7 +42,7 @@ const Product = () => {
       <div className="product-container d-flex flex-row flex-wrap justify-content-start ">
         {
           products.map((item, index) => {
-            if (item.type === 'Xe tải'  && item.newProduct) {
+            if (item.type === 'Xe tải' && item.newProduct) {
               return (
                 <ProductItem className="" key={index} name={item.name} src={item.src} href={item.id} price={item.price} />
               )

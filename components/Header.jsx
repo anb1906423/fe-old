@@ -8,7 +8,7 @@ const Header = () => {
   let [url, setUrl] = useState('')
   const [isOpen, setIsOpen] = useState(true)
   const [cookies, setCookie] = useCookies(['user']);
-  const [roles, setRoles] = useState('')
+  const [roles, setRoles] = useState('-1')
 
   useEffect(() => {
     $(document).ready(function () {
@@ -17,9 +17,11 @@ const Header = () => {
   })
 
   useEffect(() => {
-    const userCookie = cookies.user
-    setRoles(userCookie.roles)
-  }, [])
+    if (cookies.user != '') {
+      const userCookie = cookies.user
+      setRoles(userCookie.roles)
+    }
+  })
 
   useEffect(() => {
     if (isOpen === true) {

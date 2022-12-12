@@ -11,10 +11,12 @@ const PriceTableItem = (props) => {
   var self = this;
 
   const [cookies, setCookies] = useCookies(['user'])
-  const userCookie = cookies.user
   const [roles, setRoles] = useState('')
   useEffect(() => {
-    setRoles(userCookie.roles)
+    if (cookies.user != '') {
+      const userCookie = cookies.user
+      setRoles(userCookie.roles)
+    }
   }, [])
 
   const versionItem = version.map((item, index) => {

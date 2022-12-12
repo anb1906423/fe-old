@@ -12,10 +12,17 @@ import $ from 'jquery'
 const inforCustomer = () => {
     const [users, setUsers] = useState([])
     const [cookies, setCookie] = useCookies(['user']);
-    const userCookie = cookies.user
-    const [roles, setRoles] = useState('')
+    var userCookie
+    const [roles, setRoles] = useState(0)
     const [isConsulted, setIsConsulted] = useState(false)
     var isConsultedLenght = 0
+
+    useEffect(() => {
+        if (cookies.user != '') {
+            userCookie = cookies.user
+            setRoles(userCookie.roles)
+          }
+    })
 
     useEffect(() => {
         let isMounted = true;
