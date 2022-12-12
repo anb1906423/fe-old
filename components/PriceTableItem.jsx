@@ -3,7 +3,7 @@ import axios from 'axios'
 import { FaTimes } from 'react-icons/fa'
 import { swalert, swtoast} from "../mixins/swal.mixin";
 import { useCookies } from 'react-cookie'
-import {homeAPI} from "../config"
+import { homeAPI } from "../config"
 
 const PriceTableItem = (props) => {
   const [priceTable, setPriceTable] = useState([])

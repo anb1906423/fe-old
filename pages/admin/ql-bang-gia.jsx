@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useCookies } from 'react-cookie'
 import { swalert, swtoast } from "../../mixins/swal.mixin";
 import $ from 'jquery'
-import homeAPI from '../../config'
+import { homeAPI } from '../../config'
 
 const PriceTableManagePage = () => {
     const nameCarRef = useRef()
