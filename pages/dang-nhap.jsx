@@ -4,10 +4,11 @@ import Link from 'next/link'
 import Head from 'next/head'
 import axios from './api/axios'
 import Cookie, { useCookies } from 'react-cookie'
+import {homeAPI} from "../config"
 
 import { swtoast } from "../mixins/swal.mixin";
 // import useAuth from '../hooks/useAuth'
-const LOGIN_URL = 'http://localhost:3001/login'
+const LOGIN_URL = `${homeAPI}/login`
 
 const login = () => {
     // const { setAuth } = useAuth();

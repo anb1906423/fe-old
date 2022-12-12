@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import axios from 'axios'
 import { swalert, swtoast } from "../mixins/swal.mixin";
+import {homeAPI} from "../config"
 
 const ProductAdmin = (props) => {
     const [products, setProducts] = useState([])
@@ -25,7 +26,7 @@ const ProductAdmin = (props) => {
             .then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        const response = await axios.post('http://localhost:3001/admin/delete', body);
+                        const response = await axios.post(`${homeAPI}/admin/delete`, body);
                         const productsList = products.filter(product => product.id !== id)
                         setProducts(productsList);
                         swtoast.success({

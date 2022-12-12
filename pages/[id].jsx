@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Heading from '../components/Heading'
 import ProductItem from '../components/ProductItem'
 import Head from 'next/head'
+import {homeAPI} from "../config"
 
 const ProductDetail = () => {
     const router = useRouter();
@@ -15,7 +16,7 @@ const ProductDetail = () => {
     console.log(otherProducts);
     console.log(products);
     useEffect(() => {
-        fetch('http://localhost:3001/admin')
+        fetch(`${homeAPI}/admin`)
             .then((res) => res.json())
             .then((products) => {
                 setProducts(products)

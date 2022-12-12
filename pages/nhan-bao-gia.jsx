@@ -3,13 +3,14 @@ import Heading from '../components/Heading'
 import Head from 'next/head'
 import Link from 'next/link'
 import axios from './api/axios'
+import {homeAPI} from "../config"
 
 import { swtoast } from "../mixins/swal.mixin";
 
 const PHONENUMBER_REGEX = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 const PWD_REGEX = /^[a-zA-Z0-9]+$/
-const REGISTER_URL = 'http://localhost:3001/register'
+const REGISTER_URL = `${homeAPI}/register`
 
 const register = () => {
   const fullNameRef = useRef();

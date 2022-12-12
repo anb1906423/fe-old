@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Heading from '../components/Heading'
 import PriceTableItem from '../components/PriceTableItem'
 import Head from 'next/head'
+import {homeAPI} from "../config"
 
 const PriceTable = () => {
   const [priceTable, setPriceTable] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3001/admin/find-all-price-table')
+    fetch(`${homeAPI}/admin/find-all-price-table`)
       .then((res) => res.json())
       .then((priceTable) => {
         setPriceTable(priceTable)

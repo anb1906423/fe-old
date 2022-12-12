@@ -9,7 +9,8 @@ import Cookie, { useCookies } from 'react-cookie'
 import { useRouter } from 'next/router'
 import CKeditor from '../../components/CKeditor'
 import $ from 'jquery'
-const ADDPRODUCT_URL = 'http://localhost:3001/admin/add-product'
+const ADDPRODUCT_URL = `${homeAPI}/admin/add-product`
+import {homeAPI} from "../../config"
 
 const typeProducts = ['Xe du lịch', 'Xe tải']
 
@@ -55,7 +56,7 @@ const adminPage = () => {
 
 
     const getProducts = async () => {
-      fetch('http://localhost:3001/admin', {
+      fetch(`${homeAPI}/admin`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -91,7 +92,7 @@ const adminPage = () => {
       .then(async (result) => {
         if (result.isConfirmed) {
           try {
-            const response = await axios.post('http://localhost:3001/admin/delete', body)
+            const response = await axios.post(`${homeAPI}/admin/delete`, body)
             setProducts(response.data)
           } catch (err) {
             console.log(err)

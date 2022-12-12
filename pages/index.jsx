@@ -6,12 +6,14 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import AccessItem from '../components/AccessItem'
 import { FaCarAlt, FaCommentDollar, FaPhoneSquareAlt, FaFacebookSquare } from 'react-icons/fa'
+import {homeAPI} from "../config"
+
 
 export default function Home() {
   const [products, setProducts] = useState([])
-
+  console.log(homeAPI);
   useEffect(() => {
-    fetch('http://localhost:3001/admin')
+    fetch(homeAPI+'/admin')
       .then((res) => res.json())
       .then((products) => {
         setProducts(products)

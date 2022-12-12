@@ -17,7 +17,8 @@ const Header = () => {
   })
 
   useEffect(() => {
-    if (cookies.user != '') {
+    if (cookies.user != undefined) {
+
       const userCookie = cookies.user
       setRoles(userCookie.roles)
     }

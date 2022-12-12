@@ -8,6 +8,7 @@ import axios from 'axios'
 import Cookie, { useCookies } from 'react-cookie'
 import { FaTrash } from 'react-icons/fa'
 import $ from 'jquery'
+import {homeAPI} from "../../config"
 
 const inforCustomer = () => {
     const [users, setUsers] = useState([])
@@ -34,7 +35,7 @@ const inforCustomer = () => {
         }
 
         const getAllUsers = async () => {
-            fetch('http://localhost:3001', {
+            fetch(`${homeAPI}`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
@@ -69,7 +70,7 @@ const inforCustomer = () => {
             .then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        const response = await axios.post('http://localhost:3001/delete-user', body);
+                        const response = await axios.post(`${homeAPI}/delete-user`, body);
                         const userList = users.filter(user => user.id !== id)
                         setUsers(userList);
                     } catch (err) {

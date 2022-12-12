@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import ProductItem from '../components/ProductItem'
 import Heading from '../components/Heading'
 import Head from 'next/head'
+import {homeAPI} from "../config"
 
 const Product = () => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3001/admin')
+    fetch(`${homeAPI}/admin`)
       .then((res) => res.json())
       .then((products) => {
         setProducts(products)

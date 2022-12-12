@@ -3,6 +3,7 @@ import axios from 'axios'
 import { FaTimes } from 'react-icons/fa'
 import { swalert, swtoast} from "../mixins/swal.mixin";
 import { useCookies } from 'react-cookie'
+import {homeAPI} from "../config"
 
 const PriceTableItem = (props) => {
   const [priceTable, setPriceTable] = useState([])
@@ -49,7 +50,7 @@ const PriceTableItem = (props) => {
       .then(async (result) => {
         if (result.isConfirmed) {
           try {
-            const response = await axios.post('http://localhost:3001/admin/delete-price-table', body);
+            const response = await axios.post(`${homeAPI}/admin/delete-price-table`, body);
             const priceTableList = priceTable.filter(priceTable => priceTable.id !== id)
             setPriceTable(priceTableList);
             swtoast.success({

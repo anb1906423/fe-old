@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Heading from '../components/Heading'
 import { useCookies } from 'react-cookie'
 import { swalert } from "../mixins/swal.mixin";
+import {homeAPI} from "../config"
 
 const profile = () => {
   const [users, setUsers] = useState([])
@@ -36,7 +37,7 @@ const profile = () => {
   }
 
   useEffect(() => {
-    fetch('http://localhost:3001/')
+    fetch(`${homeAPI}`)
       .then((res) => res.json())
       .then((users) => {
         setUsers(users)

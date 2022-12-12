@@ -156,7 +156,7 @@ const PriceTableManagePage = () => {
             .then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        const response = await axios.post('http://localhost:3001/admin/delete-price-table', body)
+                        const response = await axios.post(`${homeAPI}/admin/delete-price-table`, body)
                         setPriceTable(response.data)
                     } catch (err) {
                         console.log(err)
