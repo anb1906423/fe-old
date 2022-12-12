@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { FaTimes } from 'react-icons/fa'
-import { swalert } from "../mixins/swal.mixin";
+import { swalert, swtoast} from "../mixins/swal.mixin";
 import { useCookies } from 'react-cookie'
 
 const PriceTableItem = (props) => {
@@ -50,14 +50,17 @@ const PriceTableItem = (props) => {
             const response = await axios.post('http://localhost:3001/admin/delete-price-table', body);
             const priceTableList = priceTable.filter(priceTable => priceTable.id !== id)
             setPriceTable(priceTableList);
-            // self.props.onRowDelete(self.props.priceTableList)
-            console.log(priceTableList);
-            console.log(response);
+            swtoast.success({
+              text: "Bảng giá đã được xóa!!",
+          });
           } catch (err) {
             if (err.response.status === 400) {
               console.log("PriceTable id is required!")
             }
             console.log(`Error: ${err.message}`);
+            swtoast.error({
+              text: "Đã xảy ra lỗi khi xóa bảng giá. Vui lòng reload lại trang!",
+          });
           }
         }
       })

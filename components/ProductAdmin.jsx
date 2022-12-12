@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import axios from 'axios'
-import { swalert } from "../mixins/swal.mixin";
+import { swalert, swtoast } from "../mixins/swal.mixin";
 
 const ProductAdmin = (props) => {
     const [products, setProducts] = useState([])
@@ -28,13 +28,17 @@ const ProductAdmin = (props) => {
                         const response = await axios.post('http://localhost:3001/admin/delete', body);
                         const productsList = products.filter(product => product.id !== id)
                         setProducts(productsList);
-                        console.log(productsList);
-                        console.log(response);
+                        swtoast.success({
+                            text: "Xe đã được xóa!!",
+                        });
                     } catch (err) {
                         if (err.response.status === 400) {
                             console.log("Product id is required!")
                         }
                         console.log(`Error: ${err.message}`);
+                        swtoast.error({
+                            text: "Đã xảy ra lỗi khi xóa xe. Vui lòng reload lại trang!",
+                        });
                     }
                 }
             })

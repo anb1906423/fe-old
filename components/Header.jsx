@@ -19,7 +19,6 @@ const Header = () => {
   useEffect(() => {
     const userCookie = cookies.user
     setRoles(userCookie.roles)
-    console.log(roles);
   }, [])
 
   useEffect(() => {

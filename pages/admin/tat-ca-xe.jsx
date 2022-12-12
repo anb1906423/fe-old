@@ -41,6 +41,10 @@ const adminPage = () => {
   }, []);
 
   useEffect(() => {
+    
+  }, [products])
+
+  useEffect(() => {
     nameRef.current.focus();
   }, [])
 
@@ -141,6 +145,7 @@ const adminPage = () => {
       swtoast.success({
         text: "Xe được thêm thành công!!",
       });
+      setProducts(product => [...product, response?.data])
       setName('')
       setPrice('')
       setDescription('')

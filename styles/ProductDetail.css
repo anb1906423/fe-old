@@ -4,6 +4,25 @@
     max-width: 50%;
 }
 
+.product-detail-wrapper {
+    margin: 12px 0;
+}
+
+.product-detail-wrapper table {
+    width: 100%;
+    text-align: center;
+    border-style: solid;
+}
+
+.product-detail-wrapper table th {
+    font-weight: bold;
+}
+
+.product-detail-wrapper table td {
+    padding: 4px;
+    border: 1px solid #ccc;
+}
+
 .product-imgs img {
     max-width: 100%;
     height: auto;

@@ -67,6 +67,12 @@
 }
 
 @media (max-width: 576px) {
+    .price-table-item {
+        margin: 12px 6px;
+    }
+    .price-table-item .img-wrapper img {
+        max-width: 90%;
+    }
     .price-table-manage-page .add-price-table-group {
         max-width: 300px;
     }

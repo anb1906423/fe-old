@@ -1,7 +1,7 @@
 .account-page {
     width: 100%;
     position: relative;
-    height: calc(100vh + 60px);
+    height: calc(100vh + 70px);
 }
 
 .login .login-wrapper,

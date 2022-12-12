@@ -37,7 +37,6 @@ const inforCustomer = () => {
                 .then((res) => res.json())
                 .then((users) => {
                     setUsers(users);
-                    console.log(users);
                 })
         }
         getAllUsers();
@@ -66,13 +65,14 @@ const inforCustomer = () => {
                         const response = await axios.post('http://localhost:3001/delete-user', body);
                         const userList = users.filter(user => user.id !== id)
                         setUsers(userList);
-                        console.log(userList);
-                        console.log(response);
                     } catch (err) {
                         if (err.response.status === 400) {
                             console.log("User id is required!")
                         }
                         console.log(`Error: ${err.message}`);
+                        swtoast.error({
+                            text: "Đã xảy ra lỗi khi xóa yêu cầu báo giá. Vui lòng reload lại trang!",
+                        });
                     }
                 }
             })

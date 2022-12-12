@@ -3,7 +3,6 @@ import Heading from '../components/Heading'
 import Head from 'next/head'
 import Link from 'next/link'
 import axios from './api/axios'
-import { useRouter } from 'next/router'
 
 import { swtoast } from "../mixins/swal.mixin";
 
@@ -13,7 +12,6 @@ const PWD_REGEX = /^[a-zA-Z0-9]+$/
 const REGISTER_URL = 'http://localhost:3001/register'
 
 const register = () => {
-  const router = useRouter()
   const fullNameRef = useRef();
   const phoneNumberRef = useRef();
   const emailRef = useRef();
@@ -35,7 +33,7 @@ const register = () => {
   const [pwdFocus, setPwdFocus] = useState(false)
 
   const [err, setErr] = useState()
-  const [success, setSuccess] = useState(false)
+  const [success, setSuccess] = useState("")
 
   useEffect(() => {
     fullNameRef.current.focus()
@@ -94,7 +92,6 @@ const register = () => {
           withCredentials: true
         },
       )
-      router.push('/dang-nhap')
       swtoast.success({
         text: "Đăng ký nhận báo giá thành công.",
       });
@@ -107,7 +104,7 @@ const register = () => {
       setPhoneNumber('')
       setEmail('')
       setPwd('')
-      setSuccess(true)
+      setSuccess("Đăng ký nhận báo giá thành công, chúng tôi sẽ liên hệ sớm nhất có thể!")
     } catch (err) {
       if (!err?.response) {
         setErr('No Server Response!')
@@ -197,6 +194,7 @@ const register = () => {
               required
             />
             <p className="text-danger">{err}</p>
+            <p className="text-success">{success}</p>
             <button className="btn submit-btn log-up-btn w-100 text-white" type="submit">Đăng ký nhận báo giá</button>
             <p className="have-account text-center">Bạn là admin?</p>
             <Link href="/dang-nhap">
